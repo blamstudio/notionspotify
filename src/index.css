@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-spotify-green: #1ed760;
+  --color-spotify-black: #121212;
+  --color-spotify-darker: #181818;
+  --color-spotify-highlight: #282828;
+  --color-spotify-border: #1a1a1a;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Custom scrollbar to match Spotify */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-700/50 hover:bg-zinc-600 transition-colors bg-clip-padding;
+    border: 3px solid transparent;
+    border-radius: 9999px;
+  }
+}
