@@ -37,7 +37,7 @@ export const PLAYLISTS: Playlist[] = [
     name: 'Cleaning Music',
     description: 'Groovy beats to sweep and scrub to. Selected by blam.',
     followersCount: 313,
-    coverUrl: '/Frame 2.png', 
+    coverUrl: '/frame2.png', 
     tracks: TRACKS.filter(t => t.id.startsWith('c')),
   },
   {
@@ -45,7 +45,7 @@ export const PLAYLISTS: Playlist[] = [
     name: 'Stay Awake! Keep Working!',
     description: 'High energy anthems for those late night grinds.',
     followersCount: 210,
-    coverUrl: '/Frame 3.png',
+    coverUrl: '/frame3.png',
     tracks: TRACKS.filter(t => t.id.startsWith('s')),
   },
   {
@@ -53,7 +53,7 @@ export const PLAYLISTS: Playlist[] = [
     name: 'Easing Into Monday Morning',
     description: 'Smooth jazz and acoustic layers for a gentle start to the week.',
     followersCount: 702,
-    coverUrl: '/Frame 1.png',
+    coverUrl: '/frame1.png',
     tracks: TRACKS.filter(t => t.id.startsWith('m')),
   },
 ];
