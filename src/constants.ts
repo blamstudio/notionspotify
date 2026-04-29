@@ -20,7 +20,8 @@ export const TRACKS: Track[] = [
   { id: 's6', title: 'I Go', artist: 'Peggy Gou', album: 'I Go', duration: '3:09', coverUrl: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=300&h=300', audioUrl: '/audio/s6.mp3' },
   { id: 's7', title: 'One More Time', artist: 'Daft Punk', album: 'Discovery', duration: '5:20', coverUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=300&h=300', audioUrl: '/audio/s7.mp3' },
 
-  // Easing Into Monday Morning Tracks (m)
+  // Easing Into Monday Morning Tracks (m) - Missing files, commenting out to prevent errors
+  /*
   { id: 'm1', title: 'Cheek To Cheek', artist: 'Smoke & Mirrors Trio', album: 'Jazz Standards', duration: '4:12', coverUrl: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=300&h=300', audioUrl: '/audio/m1.mp3' },
   { id: 'm2', title: 'I Thought About You', artist: 'Ted Lightfoot', album: 'Morning Jazz', duration: '3:45', coverUrl: 'https://images.unsplash.com/photo-1453733190371-0a9bedd82893?auto=format&fit=crop&q=80&w=300&h=300', audioUrl: '/audio/m2.mp3' },
   { id: 'm3', title: 'Slide', artist: 'Hara Noda', album: 'Slide', duration: '3:20', coverUrl: 'https://images.unsplash.com/photo-1514525253344-f2038753239a?auto=format&fit=crop&q=80&w=300&h=300', audioUrl: '/audio/m3.mp3' },
@@ -29,6 +30,7 @@ export const TRACKS: Track[] = [
   { id: 'm6', title: 'April In Paris', artist: 'Grove Street Quartet', album: 'Paris Mornings', duration: '4:30', coverUrl: 'https://images.unsplash.com/photo-1459749411177-042180ce6742?auto=format&fit=crop&q=80&w=300&h=300', audioUrl: '/audio/m6.mp3' },
   { id: 'm7', title: 'Alfie', artist: 'Long Island Quartet', album: 'Classics', duration: '2:58', coverUrl: 'https://images.unsplash.com/photo-1493225255756-d9584f8606e9?auto=format&fit=crop&q=80&w=300&h=300', audioUrl: '/audio/m7.mp3' },
   { id: 'm8', title: 'Blues Walk', artist: 'Lou Donaldson', album: 'Blues Walk', duration: '6:43', coverUrl: 'https://images.unsplash.com/photo-1526218626217-dc65a29bb444?auto=format&fit=crop&q=80&w=300&h=300', audioUrl: '/audio/m8.mp3' },
+  */
 ];
 
 export const PLAYLISTS: Playlist[] = [
@@ -48,14 +50,16 @@ export const PLAYLISTS: Playlist[] = [
     coverUrl: '/frame3.png',
     tracks: TRACKS.filter(t => t.id.startsWith('s')),
   },
-  /* {
+  /* 
+  {
     id: 'p3',
     name: 'Easing Into Monday Morning',
     description: 'Smooth jazz and acoustic layers for a gentle start to the week.',
     followersCount: 702,
     coverUrl: '/frame1.png',
     tracks: TRACKS.filter(t => t.id.startsWith('m')),
-  }, */
+  },
+  */
 ];
 
 export const NOTION_PROFILE: UserProfile = {

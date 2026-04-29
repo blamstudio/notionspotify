@@ -68,16 +68,17 @@ export default function Player({
       const response = await fetch(url, { method: 'HEAD' });
       const contentType = response.headers.get('Content-Type');
       const contentLength = response.headers.get('Content-Length');
-      debugInfo = ` | MIME: ${contentType} | Size: ${contentLength} bytes`;
+      const status = response.status;
+      debugInfo = ` | Status: ${status} | MIME: ${contentType} | Size: ${contentLength} bytes`;
     } catch (err) {
-      debugInfo = " | Could not verify file headers";
+      debugInfo = " | Could not verify file headers (CORS or Network issue)";
     }
 
     let msg = "Failed to load audio.";
     if (error?.code === 1) msg = "Aborted.";
-    if (error?.code === 2) msg = "Network error (check your connection).";
-    if (error?.code === 3) msg = "Audio decoding failed (unsupported format).";
-    if (error?.code === 4) msg = "File not found or access denied.";
+    if (error?.code === 2) msg = "Network error.";
+    if (error?.code === 3) msg = "Audio decoding failed.";
+    if (error?.code === 4) msg = "Source not supported or not found.";
     
     setError(`${msg}${debugInfo} (Path: ${url})`);
     setIsPlaying(false);
@@ -168,7 +169,6 @@ export default function Player({
         onEnded={onNext}
         onError={handleAudioError}
         preload="auto"
-        crossOrigin="anonymous"
       />
       
       {/* Track Info */}
