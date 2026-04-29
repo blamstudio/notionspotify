@@ -48,14 +48,14 @@ export const PLAYLISTS: Playlist[] = [
     coverUrl: '/frame3.png',
     tracks: TRACKS.filter(t => t.id.startsWith('s')),
   },
-  {
+  /* {
     id: 'p3',
     name: 'Easing Into Monday Morning',
     description: 'Smooth jazz and acoustic layers for a gentle start to the week.',
     followersCount: 702,
     coverUrl: '/frame1.png',
     tracks: TRACKS.filter(t => t.id.startsWith('m')),
-  },
+  }, */
 ];
 
 export const NOTION_PROFILE: UserProfile = {

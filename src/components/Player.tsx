@@ -31,19 +31,57 @@ export default function Player({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (audioRef.current) {
-        if (isPlaying) {
-            setError(null);
-            audioRef.current.play().catch(err => {
-                console.warn("Autoplay was prevented or audio failed to load:", err);
-                setError("Failed to load audio. Please ensure the file exists and is a valid MP3.");
-                setIsPlaying(false);
-            });
-        } else {
-            audioRef.current.pause();
-        }
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      setError(null);
+      
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          console.error("Audio playback error:", err);
+          
+          if (err.name === 'NotAllowedError') {
+            setError("Playback blocked. Please click play again to allow audio.");
+          } else if (err.name === 'NotSupportedError' || audio.error) {
+            setError(`Format error or file missing. (Path: ${currentTrack?.audioUrl})`);
+          } else {
+            setError("Could not play audio. Check your connection or file path.");
+          }
+          setIsPlaying(false);
+        });
+      }
+    } else {
+      audio.pause();
     }
   }, [isPlaying, currentTrack, setIsPlaying]);
+
+  const handleAudioError = async (e: any) => {
+    const error = e.currentTarget.error;
+    const url = currentTrack?.audioUrl || '';
+    
+    console.error("HTML5 Audio Error Code:", error?.code, error?.message);
+    
+    let debugInfo = "";
+    try {
+      const response = await fetch(url, { method: 'HEAD' });
+      const contentType = response.headers.get('Content-Type');
+      const contentLength = response.headers.get('Content-Length');
+      debugInfo = ` | MIME: ${contentType} | Size: ${contentLength} bytes`;
+    } catch (err) {
+      debugInfo = " | Could not verify file headers";
+    }
+
+    let msg = "Failed to load audio.";
+    if (error?.code === 1) msg = "Aborted.";
+    if (error?.code === 2) msg = "Network error (check your connection).";
+    if (error?.code === 3) msg = "Audio decoding failed (unsupported format).";
+    if (error?.code === 4) msg = "File not found or access denied.";
+    
+    setError(`${msg}${debugInfo} (Path: ${url})`);
+    setIsPlaying(false);
+  };
 
   useEffect(() => {
     // Reset error when track changes
@@ -122,11 +160,15 @@ export default function Player({
   return (
     <footer className="h-24 bg-spotify-darker border-t border-spotify-highlight text-white px-4 grid grid-cols-3 items-center fixed bottom-0 left-0 right-0 z-50">
       <audio 
+        key={currentTrack.id}
         ref={audioRef}
         src={currentTrack.audioUrl}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
         onEnded={onNext}
+        onError={handleAudioError}
+        preload="auto"
+        crossOrigin="anonymous"
       />
       
       {/* Track Info */}
